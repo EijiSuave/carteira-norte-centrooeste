@@ -200,7 +200,7 @@ document.getElementById('tbModelo').append(...GR.map(g=>el('tr',{},td(g.grupo),t
 let sel=null;
 function drawLojas(){
   const q=document.getElementById('busca').value.trim().toLowerCase(),g=document.getElementById('fGrupoLoja').value;
-  const rows=LOJAS.filter(l=>(!g||l.grupo===g)&&(!q||(l.loja+' '+l.cidade+' '+l.id+' '+l.grupo).toLowerCase().includes(q))).sort((a,b)=>b.fat_2026-a.fat_2026);
+  const rows=LOJAS.filter(l=>(!g||l.grupo===g)&&(!q||(l.loja+' '+l.cidade+' '+l.id+' '+l.grupo).toLowerCase().includes(q)));
   document.getElementById('tbLojas').replaceChildren(...rows.map(l=>{const tr=el('tr',{class:'click'+(sel===l.id?' sel':''),tabindex:'0'},td(String(l.id),'id'),td(l.loja),td(l.grupo),td(l.cidade),td(l.classe),td(pill(l.reputacao_mar,tone.rep(l.reputacao_mar))),td(l.dms),td(brl.format(l.fat_2026),'num'));
     const pick=()=>{sel=sel===l.id?null:l.id;drawLojas();drawDetalhe();if(sel)document.getElementById('detalhe').scrollIntoView({behavior:'smooth',block:'nearest'})};tr.onclick=pick;tr.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}};return tr}));
 }
